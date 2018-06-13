@@ -1,0 +1,22 @@
+{
+  "name": "ask-aircon-lambda",
+  "version": "0.0.1",
+  "description": "Alexa Skill Kit for Aircon.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edsgerlin/ask-aircon-lambda.git"
+  },
+  "author": "Zhiyuan Lin",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/edsgerlin/ask-aircon-lambda/issues"
+  },
+  "homepage": "https://github.com/edsgerlin/ask-aircon-lambda#readme",
+  "dependencies": {
+    "ask-sdk": "2.0.6"
+  }
+}
