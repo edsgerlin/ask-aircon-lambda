@@ -1,4 +1,6 @@
-const Alexa = require('ask-sdk-core');
+'use strict';
+
+const Alexa = require('ask-sdk');
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
