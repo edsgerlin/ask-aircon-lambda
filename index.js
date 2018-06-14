@@ -212,6 +212,109 @@ const SpeedThreeIntentHandler = {
   },
 };
 
+const DirectionAutoIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DirectionAuto';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting direction to auto.';
+
+    putForm({ dir: 'auto' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const DirectionOneIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DirectionOne';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting direction to one.';
+
+    putForm({ dir: '1' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const DirectionTwoIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DirectionTwo';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting direction to two.';
+
+    putForm({ dir: '2' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const DirectionThreeIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DirectionThree';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting direction to three.';
+
+    putForm({ dir: '3' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const DirectionFourIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DirectionFour';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting direction to four.';
+
+    putForm({ dir: '4' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const DirectionFiveIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DirectionFive';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting direction to five.';
+
+    putForm({ dir: '5' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -281,6 +384,16 @@ exports.handler = skillBuilder
     ModeHeatIntentHandler,
     TempUpIntentHandler,
     TempDownIntentHandler,
+    SpeedAutoIntentHandler,
+    SpeedOneIntentHandler,
+    SpeedTwoIntentHandler,
+    SpeedThreeIntentHandler,
+    DirectionAutoIntentHandler,
+    DirectionOneIntentHandler,
+    DirectionTwoIntentHandler,
+    DirectionThreeIntentHandler,
+    DirectionFourIntentHandler,
+    DirectionFiveIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
