@@ -2,6 +2,9 @@
 
 const Alexa = require('ask-sdk');
 
+const BASE_URL = process.env.BASE_URL || 'https://localhost';
+
+
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
