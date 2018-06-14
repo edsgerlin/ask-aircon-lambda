@@ -1,0 +1,124 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "air conditioner control",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "PowerOn",
+                    "samples": [
+                        "power on"
+                    ]
+                },
+                {
+                    "name": "PowerOff",
+                    "samples": [
+                        "power off"
+                    ]
+                },
+                {
+                    "name": "ModeDry",
+                    "samples": [
+                        "dry mode"
+                    ]
+                },
+                {
+                    "name": "ModeHeat",
+                    "samples": [
+                        "heat mode"
+                    ]
+                },
+                {
+                    "name": "ModeCool",
+                    "samples": [
+                        "cool mode"
+                    ]
+                },
+                {
+                    "name": "TempUp",
+                    "samples": [
+                        "temperature up"
+                    ]
+                },
+                {
+                    "name": "TempDown",
+                    "samples": [
+                        "temperature down"
+                    ]
+                },
+                {
+                    "name": "SpeedAuto",
+                    "samples": [
+                        "set speed to auto"
+                    ]
+                },
+                {
+                    "name": "SpeedOne",
+                    "samples": [
+                        "set speed to one"
+                    ]
+                },
+                {
+                    "name": "SpeedTwo",
+                    "samples": [
+                        "set speed to two"
+                    ]
+                },
+                {
+                    "name": "SpeedThree",
+                    "samples": [
+                        "set speed to three"
+                    ]
+                },
+                {
+                    "name": "DirectionAuto",
+                    "samples": [
+                        "set direction to auto"
+                    ]
+                },
+                {
+                    "name": "DirectionOne",
+                    "samples": [
+                        "set direction to one"
+                    ]
+                },
+                {
+                    "name": "DirectionTwo",
+                    "samples": [
+                        "set direction to two"
+                    ]
+                },
+                {
+                    "name": "DirectionThree",
+                    "samples": [
+                        "set direction to three"
+                    ]
+                },
+                {
+                    "name": "DirectionFour",
+                    "samples": [
+                        "set direction to four"
+                    ]
+                },
+                {
+                    "name": "DirectionFive",
+                    "samples": [
+                        "set direction to five"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
