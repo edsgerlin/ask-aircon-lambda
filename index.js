@@ -7,27 +7,12 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   handle(handlerInput) {
-    const speechText = 'Welcome to the Alexa Skills Kit, you can say hello!';
+    const speechText = 'Welcome to the air conditioner control, you can say power on!';
 
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
-      .withSimpleCard('Hello World', speechText)
-      .getResponse();
-  },
-};
-
-const HelloWorldIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
-  },
-  handle(handlerInput) {
-    const speechText = 'Hello World!';
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
+      .withSimpleCard('AC Control', speechText)
       .getResponse();
   },
 };
@@ -38,11 +23,26 @@ const PowerOnIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'PowerOn';
   },
   handle(handlerInput) {
-    const speechText = 'Hello PowerOn!';
+    const speechText = 'Powering on.';
 
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withSimpleCard('Hello PowerOn', speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const PowerOffIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'PowerOff';
+  },
+  handle(handlerInput) {
+    const speechText = 'Powering off.';
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
       .getResponse();
   },
 };
@@ -53,12 +53,12 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'You can say hello to me!';
+    const speechText = 'You can say power on, power off or cool mode and more!';
 
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
-      .withSimpleCard('Hello World', speechText)
+      .withSimpleCard('AC Control', speechText)
       .getResponse();
   },
 };
@@ -109,11 +109,11 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    HelloWorldIntentHandler,
+    PowerOnIntentHandler,
+    PowerOffIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
-    PowerOnIntentHandler,
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();
