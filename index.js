@@ -110,6 +110,40 @@ const ModeHeatIntentHandler = {
   },
 };
 
+const TempUpIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'TempUp';
+  },
+  handle(handlerInput) {
+    const speechText = 'Turning up temperature.';
+
+    putForm({ temp: 'up' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const TempDownIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'TempDown';
+  },
+  handle(handlerInput) {
+    const speechText = 'Turning down temperature.';
+
+    putForm({ temp: 'down' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
