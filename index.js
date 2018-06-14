@@ -1,9 +1,14 @@
 'use strict';
 
 const Alexa = require('ask-sdk');
+const request = require('request');
 
 const BASE_URL = process.env.BASE_URL || 'https://localhost';
+const url = `${BASE_URL}/ac`
 
+function putForm(form) {
+  return request.put(url, { form });
+}
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -28,6 +33,8 @@ const PowerOnIntentHandler = {
   handle(handlerInput) {
     const speechText = 'Powering on.';
 
+    putForm({ power: 'on' });
+
     return handlerInput.responseBuilder
       .speak(speechText)
       .withSimpleCard(speechText, speechText)
@@ -42,6 +49,59 @@ const PowerOffIntentHandler = {
   },
   handle(handlerInput) {
     const speechText = 'Powering off.';
+
+    putForm({ power: 'off' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const ModeCoolIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'ModeCool';
+  },
+  handle(handlerInput) {
+    const speechText = 'Changing to cool mode.';
+
+    putForm({ mode: 'cool' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const ModeDryIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'ModeDry';
+  },
+  handle(handlerInput) {
+    const speechText = 'Changing to dry mode.';
+
+    putForm({ mode: 'dry' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const ModeHeatIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'ModeHeat';
+  },
+  handle(handlerInput) {
+    const speechText = 'Changing to heat mode.';
+
+    putForm({ mode: 'heat' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -114,9 +174,12 @@ exports.handler = skillBuilder
     LaunchRequestHandler,
     PowerOnIntentHandler,
     PowerOffIntentHandler,
+    ModeDryIntentHandler,
+    ModeCoolIntentHandler,
+    ModeHeatIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
-  )
+)
   .addErrorHandlers(ErrorHandler)
   .lambda();
