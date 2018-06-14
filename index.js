@@ -18,6 +18,18 @@ async function putWithForm(form) {
   });
 }
 
+async function getACStatus() {
+  return new Promise((resolve, reject) => {
+    request.get(url, (error, response, body) => {
+      // body = { mode: 'dry', speed: 'auto', power: 'off', dir: 'auto', temp: 28 }
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(body));
+    });
+  });
+}
+
 const LaunchRequestHandler = {
   async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
