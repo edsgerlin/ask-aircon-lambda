@@ -6,8 +6,11 @@ const request = require('request');
 const BASE_URL = process.env.BASE_URL || 'https://localhost';
 const url = `${BASE_URL}/ac`
 
-function putForm(form) {
-  return request.put(url, { form });
+function putForm(form, callback = console.log) {
+  return request.put(url, { form }, (error, response, body) => {
+    // body = { mode: 'dry', speed: 'auto', power: 'off', dir: 'auto', temp: 28 }
+    callback(JSON.parse(body))
+  });
 }
 
 const LaunchRequestHandler = {
