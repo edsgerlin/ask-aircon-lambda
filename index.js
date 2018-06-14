@@ -144,6 +144,74 @@ const TempDownIntentHandler = {
   },
 };
 
+const SpeedAutoIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'SpeedAuto';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting speed to auto.';
+
+    putForm({ speed: 'auto' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const SpeedOneIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'SpeedOne';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting speed to one.';
+
+    putForm({ speed: '1' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const SpeedTwoIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'SpeedTwo';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting speed to two.';
+
+    putForm({ speed: '2' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
+const SpeedThreeIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'SpeedThree';
+  },
+  handle(handlerInput) {
+    const speechText = 'Setting speed to three.';
+
+    putForm({ speed: '3' });
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -211,6 +279,8 @@ exports.handler = skillBuilder
     ModeDryIntentHandler,
     ModeCoolIntentHandler,
     ModeHeatIntentHandler,
+    TempUpIntentHandler,
+    TempDownIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
