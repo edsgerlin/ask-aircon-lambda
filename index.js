@@ -6,18 +6,23 @@ const request = require('request');
 const BASE_URL = process.env.BASE_URL || 'https://localhost';
 const url = `${BASE_URL}/ac`
 
-function putForm(form, callback = console.log) {
-  return request.put(url, { form }, (error, response, body) => {
-    // body = { mode: 'dry', speed: 'auto', power: 'off', dir: 'auto', temp: 28 }
-    callback(JSON.parse(body))
+async function putWithForm(form) {
+  return new Promise((resolve, reject) => {
+    request.put(url, { form }, (error, response, body) => {
+      // body = { mode: 'dry', speed: 'auto', power: 'off', dir: 'auto', temp: 28 }
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(body));
+    });
   });
 }
 
 const LaunchRequestHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Welcome to the air conditioner control, you can say power on!';
 
     return handlerInput.responseBuilder
@@ -29,14 +34,14 @@ const LaunchRequestHandler = {
 };
 
 const PowerOnIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'PowerOn';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Powering on.';
 
-    putForm({ power: 'on' });
+    const acStatus = await putWithForm({ power: 'on' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -46,14 +51,14 @@ const PowerOnIntentHandler = {
 };
 
 const PowerOffIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'PowerOff';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Powering off.';
 
-    putForm({ power: 'off' });
+    const acStatus = await putWithForm({ power: 'off' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -63,14 +68,14 @@ const PowerOffIntentHandler = {
 };
 
 const ModeCoolIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'ModeCool';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Changing to cool mode.';
 
-    putForm({ mode: 'cool' });
+    const acStatus = await putWithForm({ mode: 'cool' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -80,14 +85,14 @@ const ModeCoolIntentHandler = {
 };
 
 const ModeDryIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'ModeDry';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Changing to dry mode.';
 
-    putForm({ mode: 'dry' });
+    const acStatus = await putWithForm({ mode: 'dry' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -97,14 +102,14 @@ const ModeDryIntentHandler = {
 };
 
 const ModeHeatIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'ModeHeat';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Changing to heat mode.';
 
-    putForm({ mode: 'heat' });
+    const acStatus = await putWithForm({ mode: 'heat' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -114,14 +119,14 @@ const ModeHeatIntentHandler = {
 };
 
 const TempUpIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'TempUp';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Turning up temperature.';
 
-    putForm({ temp: 'up' });
+    const acStatus = await putWithForm({ temp: 'up' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -131,14 +136,14 @@ const TempUpIntentHandler = {
 };
 
 const TempDownIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'TempDown';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Turning down temperature.';
 
-    putForm({ temp: 'down' });
+    const acStatus = await putWithForm({ temp: 'down' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -148,14 +153,14 @@ const TempDownIntentHandler = {
 };
 
 const SpeedAutoIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'SpeedAuto';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting speed to auto.';
 
-    putForm({ speed: 'auto' });
+    const acStatus = await putWithForm({ speed: 'auto' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -165,14 +170,14 @@ const SpeedAutoIntentHandler = {
 };
 
 const SpeedOneIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'SpeedOne';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting speed to one.';
 
-    putForm({ speed: '1' });
+    const acStatus = await putWithForm({ speed: '1' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -182,14 +187,14 @@ const SpeedOneIntentHandler = {
 };
 
 const SpeedTwoIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'SpeedTwo';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting speed to two.';
 
-    putForm({ speed: '2' });
+    const acStatus = await putWithForm({ speed: '2' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -199,14 +204,14 @@ const SpeedTwoIntentHandler = {
 };
 
 const SpeedThreeIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'SpeedThree';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting speed to three.';
 
-    putForm({ speed: '3' });
+    const acStatus = await putWithForm({ speed: '3' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -216,14 +221,14 @@ const SpeedThreeIntentHandler = {
 };
 
 const DirectionAutoIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'DirectionAuto';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting direction to auto.';
 
-    putForm({ dir: 'auto' });
+    const acStatus = await putWithForm({ dir: 'auto' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -233,14 +238,14 @@ const DirectionAutoIntentHandler = {
 };
 
 const DirectionOneIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'DirectionOne';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting direction to one.';
 
-    putForm({ dir: '1' });
+    const acStatus = await putWithForm({ dir: '1' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -250,14 +255,14 @@ const DirectionOneIntentHandler = {
 };
 
 const DirectionTwoIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'DirectionTwo';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting direction to two.';
 
-    putForm({ dir: '2' });
+    const acStatus = await putWithForm({ dir: '2' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -267,14 +272,14 @@ const DirectionTwoIntentHandler = {
 };
 
 const DirectionThreeIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'DirectionThree';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting direction to three.';
 
-    putForm({ dir: '3' });
+    const acStatus = await putWithForm({ dir: '3' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -284,14 +289,14 @@ const DirectionThreeIntentHandler = {
 };
 
 const DirectionFourIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'DirectionFour';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting direction to four.';
 
-    putForm({ dir: '4' });
+    const acStatus = await putWithForm({ dir: '4' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -301,14 +306,14 @@ const DirectionFourIntentHandler = {
 };
 
 const DirectionFiveIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'DirectionFive';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Setting direction to five.';
 
-    putForm({ dir: '5' });
+    const acStatus = await putWithForm({ dir: '5' });
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -319,11 +324,11 @@ const DirectionFiveIntentHandler = {
 
 
 const HelpIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'You can say power on, power off or cool mode and more!';
 
     return handlerInput.responseBuilder
@@ -335,12 +340,12 @@ const HelpIntentHandler = {
 };
 
 const CancelAndStopIntentHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
         || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'Goodbye!';
 
     return handlerInput.responseBuilder
@@ -351,10 +356,10 @@ const CancelAndStopIntentHandler = {
 };
 
 const SessionEndedRequestHandler = {
-  canHandle(handlerInput) {
+  async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
 
     return handlerInput.responseBuilder.getResponse();
@@ -362,10 +367,10 @@ const SessionEndedRequestHandler = {
 };
 
 const ErrorHandler = {
-  canHandle() {
+  async canHandle() {
     return true;
   },
-  handle(handlerInput, error) {
+  async handle(handlerInput, error) {
     console.log(`Error handled: ${error.message}`);
 
     return handlerInput.responseBuilder
