@@ -36,19 +36,17 @@
                     ]
                 },
                 {
-                    "name": "TempUp",
+                    "name": "ChangeTemperature",
+                    "slots": [
+                        {
+                            "name": "Temperature",
+                            "type": "TEMPERATURE"
+                        }
+                    ],
                     "samples": [
-                        "temperature up",
-                        "turn temperature up",
-                        "ac temperature up"
-                    ]
-                },
-                {
-                    "name": "TempDown",
-                    "samples": [
-                        "temperature down",
-                        "turn temperature down",
-                        "ac temperature down"
+                        "temperature {Temperature}",
+                        "turn temperature {Temperature}",
+                        "ac temperature {Temperature}"
                     ]
                 },
                 {
@@ -68,7 +66,33 @@
                     ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "TEMPERATURE",
+                    "values": [
+                        {
+                            "id": "UP",
+                            "name": {
+                                "value": "up",
+                                "synonyms": [
+                                    "higher",
+                                    "high"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "DOWN",
+                            "name": {
+                                "value": "down",
+                                "synonyms": [
+                                    "lower",
+                                    "low"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     }
 }
