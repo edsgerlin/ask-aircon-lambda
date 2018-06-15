@@ -132,15 +132,17 @@ const TempDownIntentHandler = {
   },
 };
 
-const SpeedAutoIntentHandler = {
+const ChangeSpeedIntentHandler = {
   async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'SpeedAuto';
+      && handlerInput.requestEnvelope.request.intent.name === 'ChangeSpeed';
   },
   async handle(handlerInput) {
-    const speechText = 'Setting speed to auto.';
-
-    const acStatus = await putWithForm({ speed: 'auto' });
+    const oldACStatus = await getACStatus();
+    const oldSpeed = oldACStatus.speed;
+    const acStatus = await putWithForm({ speed: 'whatever' });
+    const newSpeed = acStatus.speed;
+    const speechText = `Changing speed from ${oldSpeed} to ${newSpeed}.`;
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -149,15 +151,17 @@ const SpeedAutoIntentHandler = {
   },
 };
 
-const SpeedOneIntentHandler = {
+const ChangeDirectionIntentHandler = {
   async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'SpeedOne';
+      && handlerInput.requestEnvelope.request.intent.name === 'ChangeDirection';
   },
   async handle(handlerInput) {
-    const speechText = 'Setting speed to one.';
-
-    const acStatus = await putWithForm({ speed: '1' });
+    const oldACStatus = await getACStatus();
+    const oldDirection = oldACStatus.direction;
+    const acStatus = await putWithForm({ direction: 'whatever' });
+    const newDirection = acStatus.direction;
+    const speechText = `Changing direction from ${oldDirection} to ${newDirection}.`;
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -165,143 +169,6 @@ const SpeedOneIntentHandler = {
       .getResponse();
   },
 };
-
-const SpeedTwoIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'SpeedTwo';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Setting speed to two.';
-
-    const acStatus = await putWithForm({ speed: '2' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const SpeedThreeIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'SpeedThree';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Setting speed to three.';
-
-    const acStatus = await putWithForm({ speed: '3' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const DirectionAutoIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'DirectionAuto';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Setting direction to auto.';
-
-    const acStatus = await putWithForm({ dir: 'auto' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const DirectionOneIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'DirectionOne';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Setting direction to one.';
-
-    const acStatus = await putWithForm({ dir: '1' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const DirectionTwoIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'DirectionTwo';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Setting direction to two.';
-
-    const acStatus = await putWithForm({ dir: '2' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const DirectionThreeIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'DirectionThree';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Setting direction to three.';
-
-    const acStatus = await putWithForm({ dir: '3' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const DirectionFourIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'DirectionFour';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Setting direction to four.';
-
-    const acStatus = await putWithForm({ dir: '4' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const DirectionFiveIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'DirectionFive';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Setting direction to five.';
-
-    const acStatus = await putWithForm({ dir: '5' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
 
 const HelpIntentHandler = {
   async canHandle(handlerInput) {
@@ -370,16 +237,8 @@ exports.handler = skillBuilder
     ChangeModeIntentHandler,
     TempUpIntentHandler,
     TempDownIntentHandler,
-    SpeedAutoIntentHandler,
-    SpeedOneIntentHandler,
-    SpeedTwoIntentHandler,
-    SpeedThreeIntentHandler,
-    DirectionAutoIntentHandler,
-    DirectionOneIntentHandler,
-    DirectionTwoIntentHandler,
-    DirectionThreeIntentHandler,
-    DirectionFourIntentHandler,
-    DirectionFiveIntentHandler,
+    ChangeSpeedIntentHandler,
+    ChangeDirectionIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
