@@ -151,6 +151,23 @@ const ChangeDirectionIntentHandler = {
   },
 };
 
+const GetRoomTemperatureIntentHandler = {
+  async canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'GetRoomTemperature';
+  },
+  async handle(handlerInput) {
+    const acStatus = await getACStatus();
+    const roomTemperature = acStatus.room_temp;
+    const speechText = `Current room temperature is ${roomTemperature}°C.`;
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
 const HelpIntentHandler = {
   async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -218,6 +235,7 @@ exports.handler = skillBuilder
     ChangeTemperatureIntentHandler,
     ChangeSpeedIntentHandler,
     ChangeDirectionIntentHandler,
+    GetRoomTemperatureIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
