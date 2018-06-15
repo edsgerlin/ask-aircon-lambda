@@ -64,7 +64,6 @@ const DeviceCommandIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'DeviceCommand';
   },
   async handle(handlerInput) {
-    const oldACStatus = await getACStatus();
     const {intent} = handlerInput.requestEnvelope.request;
     const {slots} = intent;
     const device = slots.Device.value === 'light' ? 'iris_oyama.light' : 'pioneer.tv';
@@ -270,6 +269,7 @@ exports.handler = skillBuilder
     ChangeSpeedIntentHandler,
     ChangeDirectionIntentHandler,
     GetRoomTemperatureIntentHandler,
+    DeviceCommandIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
