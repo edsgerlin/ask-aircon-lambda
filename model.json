@@ -73,6 +73,23 @@
                         "get current temperature",
                         "what is the temperature"
                     ]
+                },
+                {
+                    "name": "DeviceCommand",
+                    "slots": [
+                        {
+                            "name": "Device",
+                            "type": "DEVICE"
+                        },
+                        {
+                            "name": "Command",
+                            "type": "COMMAND"
+                        }
+                    ],
+                    "samples": [
+                        "let {Device} {Command}",
+                        "tell {Device} to {Command}"
+                    ]
                 }
             ],
             "types": [
@@ -119,6 +136,169 @@
                                 "value": "off",
                                 "synonyms": [
                                     "down"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DEVICE",
+                    "values": [
+                        {
+                            "id": "iris_oyama.light",
+                            "name": {
+                                "value": "light"
+                            }
+                        },
+                        {
+                            "id": "pioneer.tv",
+                            "name": {
+                                "value": "tv"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "COMMAND",
+                    "values": [
+                        {
+                            "id": "time",
+                            "name": {
+                                "value": "time",
+                                "synonyms": [
+                                    "key time",
+                                    "time key"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "brightnessdown",
+                            "name": {
+                                "value": "brightness down",
+                                "synonyms": [
+                                    "less brighter"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "brightnessup",
+                            "name": {
+                                "value": "brightness up",
+                                "synonyms": [
+                                    "brighter"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "blue",
+                            "name": {
+                                "value": "blue",
+                                "synonyms": [
+                                    "blue light",
+                                    "turn blue"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "red",
+                            "name": {
+                                "value": "red",
+                                "synonyms": [
+                                    "turn red",
+                                    "red light"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "mute",
+                            "name": {
+                                "value": "mute",
+                                "synonyms": [
+                                    "silence"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "menu",
+                            "name": {
+                                "value": "menu",
+                                "synonyms": [
+                                    "show menu",
+                                    "key menu",
+                                    "menu key"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "right",
+                            "name": {
+                                "value": "right",
+                                "synonyms": [
+                                    "right key",
+                                    "key right"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "left",
+                            "name": {
+                                "value": "left",
+                                "synonyms": [
+                                    "left key",
+                                    "key left"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "down",
+                            "name": {
+                                "value": "down",
+                                "synonyms": [
+                                    "down key",
+                                    "key down"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "up",
+                            "name": {
+                                "value": "up",
+                                "synonyms": [
+                                    "up key",
+                                    "key up"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "volumedown",
+                            "name": {
+                                "value": "volume down",
+                                "synonyms": [
+                                    "reduce volumn",
+                                    "decrease volumn"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "volumeup",
+                            "name": {
+                                "value": "volume up",
+                                "synonyms": [
+                                    "louder",
+                                    "increase volume"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "power",
+                            "name": {
+                                "value": "power",
+                                "synonyms": [
+                                    "power off",
+                                    "power on",
+                                    "change power",
+                                    "turn off",
+                                    "turn on"
                                 ]
                             }
                         }

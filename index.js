@@ -58,6 +58,27 @@ const LaunchRequestHandler = {
   },
 };
 
+const DeviceCommandIntentHandler = {
+  async canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'DeviceCommand';
+  },
+  async handle(handlerInput) {
+    const oldACStatus = await getACStatus();
+    const {intent} = handlerInput.requestEnvelope.request;
+    const {slots} = intent;
+    const device = slots.Device.value === 'light' ? 'iris_oyama.light' : 'pioneer.tv';
+    const command = slots.Command.value.replace(' ', '')
+
+    await putRemote(device, command);
+    let speechText = `${slots.Device.value} is ${command}.`;
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+  },
+};
+
 const ChangePowerIntentHandler = {
   async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
