@@ -29,6 +29,7 @@
                 },
                 {
                     "name": "ChangeMode",
+                    "slots": [],
                     "samples": [
                         "change ac mode",
                         "change air conditioner mode",
@@ -51,6 +52,7 @@
                 },
                 {
                     "name": "ChangeSpeed",
+                    "slots": [],
                     "samples": [
                         "change ac speed",
                         "change air conditioner speed",
@@ -59,6 +61,7 @@
                 },
                 {
                     "name": "ChangeDirection",
+                    "slots": [],
                     "samples": [
                         "change ac direction",
                         "change air conditioner direction",
@@ -67,6 +70,7 @@
                 },
                 {
                     "name": "GetRoomTemperature",
+                    "slots": [],
                     "samples": [
                         "get room temperature",
                         "get temperature",
@@ -164,142 +168,85 @@
                         {
                             "id": "time",
                             "name": {
-                                "value": "time",
-                                "synonyms": [
-                                    "key time",
-                                    "time key"
-                                ]
+                                "value": "time"
                             }
                         },
                         {
                             "id": "brightnessdown",
                             "name": {
-                                "value": "brightness down",
-                                "synonyms": [
-                                    "less brighter"
-                                ]
+                                "value": "brightness down"
                             }
                         },
                         {
                             "id": "brightnessup",
                             "name": {
-                                "value": "brightness up",
-                                "synonyms": [
-                                    "brighter"
-                                ]
+                                "value": "brightness up"
                             }
                         },
                         {
                             "id": "blue",
                             "name": {
-                                "value": "blue",
-                                "synonyms": [
-                                    "blue light",
-                                    "turn blue"
-                                ]
+                                "value": "blue"
                             }
                         },
                         {
                             "id": "red",
                             "name": {
-                                "value": "red",
-                                "synonyms": [
-                                    "turn red",
-                                    "red light"
-                                ]
+                                "value": "red"
                             }
                         },
                         {
                             "id": "mute",
                             "name": {
-                                "value": "mute",
-                                "synonyms": [
-                                    "silence"
-                                ]
+                                "value": "mute"
                             }
                         },
                         {
                             "id": "menu",
                             "name": {
-                                "value": "menu",
-                                "synonyms": [
-                                    "show menu",
-                                    "key menu",
-                                    "menu key"
-                                ]
+                                "value": "menu"
                             }
                         },
                         {
                             "id": "right",
                             "name": {
-                                "value": "right",
-                                "synonyms": [
-                                    "right key",
-                                    "key right"
-                                ]
+                                "value": "right"
                             }
                         },
                         {
                             "id": "left",
                             "name": {
-                                "value": "left",
-                                "synonyms": [
-                                    "left key",
-                                    "key left"
-                                ]
+                                "value": "left"
                             }
                         },
                         {
                             "id": "down",
                             "name": {
-                                "value": "down",
-                                "synonyms": [
-                                    "down key",
-                                    "key down"
-                                ]
+                                "value": "down"
                             }
                         },
                         {
                             "id": "up",
                             "name": {
-                                "value": "up",
-                                "synonyms": [
-                                    "up key",
-                                    "key up"
-                                ]
+                                "value": "up"
                             }
                         },
                         {
                             "id": "volumedown",
                             "name": {
-                                "value": "volume down",
-                                "synonyms": [
-                                    "reduce volumn",
-                                    "decrease volumn"
-                                ]
+                                "value": "volume down"
                             }
                         },
                         {
                             "id": "volumeup",
                             "name": {
-                                "value": "volume up",
-                                "synonyms": [
-                                    "louder",
-                                    "increase volume"
-                                ]
+                                "value": "volume up"
                             }
                         },
                         {
                             "id": "power",
                             "name": {
-                                "value": "power",
-                                "synonyms": [
-                                    "power off",
-                                    "power on",
-                                    "change power",
-                                    "turn off",
-                                    "turn on"
-                                ]
+                                "value": "power"
                             }
                         }
                     ]
