@@ -79,49 +79,17 @@ const PowerOffIntentHandler = {
   },
 };
 
-const ModeCoolIntentHandler = {
+const ChangeModeIntentHandler = {
   async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'ModeCool';
+      && handlerInput.requestEnvelope.request.intent.name === 'ChangeMode';
   },
   async handle(handlerInput) {
-    const speechText = 'Changing to cool mode.';
-
-    const acStatus = await putWithForm({ mode: 'cool' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const ModeDryIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'ModeDry';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Changing to dry mode.';
-
-    const acStatus = await putWithForm({ mode: 'dry' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const ModeHeatIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'ModeHeat';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Changing to heat mode.';
-
-    const acStatus = await putWithForm({ mode: 'heat' });
+    const oldACStatus = await getACStatus();
+    const oldMode = oldACStatus.mode;
+    const acStatus = await putWithForm({ mode: 'whatever' });
+    const newMode = acStatus.mode;
+    const speechText = `Changing from ${oldMode} mode to ${newMode} mode.`;
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -399,9 +367,7 @@ exports.handler = skillBuilder
     LaunchRequestHandler,
     PowerOnIntentHandler,
     PowerOffIntentHandler,
-    ModeDryIntentHandler,
-    ModeCoolIntentHandler,
-    ModeHeatIntentHandler,
+    ChangeModeIntentHandler,
     TempUpIntentHandler,
     TempDownIntentHandler,
     SpeedAutoIntentHandler,
