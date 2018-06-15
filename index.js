@@ -98,32 +98,20 @@ const ChangeModeIntentHandler = {
   },
 };
 
-const TempUpIntentHandler = {
+const ChangeTemperatureIntentHandler = {
   async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'TempUp';
+      && handlerInput.requestEnvelope.request.intent.name === 'ChangeTemperature';
   },
   async handle(handlerInput) {
-    const speechText = 'Turning up temperature.';
-
-    const acStatus = await putWithForm({ temp: 'up' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
-
-const TempDownIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'TempDown';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Turning down temperature.';
-
-    const acStatus = await putWithForm({ temp: 'down' });
+    const {intent} = handlerInput.requestEnvelope.request;
+    const {slots} = intent;
+    const temp = slots.Temperature.value || 'up';
+    const oldACStatus = await getACStatus();
+    const oldTemperature = oldACStatus.temp;
+    const acStatus = await putWithForm({ temp });
+    const temperature = acStatus.temp;
+    const speechText = `Temperature changed from ${oldTemperature} to ${temperature}.`;
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -235,8 +223,7 @@ exports.handler = skillBuilder
     PowerOnIntentHandler,
     PowerOffIntentHandler,
     ChangeModeIntentHandler,
-    TempUpIntentHandler,
-    TempDownIntentHandler,
+    ChangeTemperatureIntentHandler,
     ChangeSpeedIntentHandler,
     ChangeDirectionIntentHandler,
     HelpIntentHandler,
