@@ -48,7 +48,7 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   async handle(handlerInput) {
-    const speechText = 'Welcome to the air conditioner control, you can say power on!';
+    const speechText = 'Welcome to device control, you can say power on!';
 
     return handlerInput.responseBuilder
       .speak(speechText)
