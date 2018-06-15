@@ -45,16 +45,25 @@ const LaunchRequestHandler = {
   },
 };
 
-const PowerOnIntentHandler = {
+const ChangePowerIntentHandler = {
   async canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'PowerOn';
+      && handlerInput.requestEnvelope.request.intent.name === 'ChangePower';
   },
   async handle(handlerInput) {
-    const speechText = 'Powering on.';
-
-    const acStatus = await putWithForm({ power: 'on' });
-
+    const oldACStatus = await getACStatus();
+    const {intent} = handlerInput.requestEnvelope.request;
+    const {slots} = intent;
+    const power = slots.Power.value || 'on';
+    if (power === oldACStatus.power) {
+      const speechText = `Power is already ${power}.`;
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .withSimpleCard(speechText, speechText)
+      .getResponse();
+    }
+    await putWithForm({ power });
+    let speechText = `Powering ${power}.`;
     return handlerInput.responseBuilder
       .speak(speechText)
       .withSimpleCard(speechText, speechText)
@@ -62,22 +71,6 @@ const PowerOnIntentHandler = {
   },
 };
 
-const PowerOffIntentHandler = {
-  async canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'PowerOff';
-  },
-  async handle(handlerInput) {
-    const speechText = 'Powering off.';
-
-    const acStatus = await putWithForm({ power: 'off' });
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard(speechText, speechText)
-      .getResponse();
-  },
-};
 
 const ChangeModeIntentHandler = {
   async canHandle(handlerInput) {
@@ -220,8 +213,7 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    PowerOnIntentHandler,
-    PowerOffIntentHandler,
+    ChangePowerIntentHandler,
     ChangeModeIntentHandler,
     ChangeTemperatureIntentHandler,
     ChangeSpeedIntentHandler,

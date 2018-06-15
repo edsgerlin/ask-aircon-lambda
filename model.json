@@ -16,15 +16,15 @@
                     "samples": []
                 },
                 {
-                    "name": "PowerOn",
+                    "name": "ChangePower",
+                    "slots": [
+                        {
+                            "name": "Power",
+                            "type": "POWER"
+                        }
+                    ],
                     "samples": [
-                        "power on"
-                    ]
-                },
-                {
-                    "name": "PowerOff",
-                    "samples": [
-                        "power off"
+                        "power {Power}"
                     ]
                 },
                 {
@@ -87,6 +87,29 @@
                                 "synonyms": [
                                     "lower",
                                     "low"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "POWER",
+                    "values": [
+                        {
+                            "id": "ON",
+                            "name": {
+                                "value": "on",
+                                "synonyms": [
+                                    "up"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "OFF",
+                            "name": {
+                                "value": "off",
+                                "synonyms": [
+                                    "down"
                                 ]
                             }
                         }
