@@ -139,9 +139,9 @@ const ChangeDirectionIntentHandler = {
   },
   async handle(handlerInput) {
     const oldACStatus = await getACStatus();
-    const oldDirection = oldACStatus.direction;
-    const acStatus = await putWithForm({ direction: 'whatever' });
-    const newDirection = acStatus.direction;
+    const oldDirection = oldACStatus.dir;
+    const acStatus = await putWithForm({ dir: 'whatever' });
+    const newDirection = acStatus.dir;
     const speechText = `Changing direction from ${oldDirection} to ${newDirection}.`;
 
     return handlerInput.responseBuilder
