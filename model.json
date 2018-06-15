@@ -28,93 +28,43 @@
                     ]
                 },
                 {
-                    "name": "ModeDry",
+                    "name": "ChangeMode",
                     "samples": [
-                        "dry mode"
-                    ]
-                },
-                {
-                    "name": "ModeHeat",
-                    "samples": [
-                        "heat mode"
-                    ]
-                },
-                {
-                    "name": "ModeCool",
-                    "samples": [
-                        "cool mode"
+                        "change ac mode",
+                        "change air conditioner mode",
+                        "change mode"
                     ]
                 },
                 {
                     "name": "TempUp",
                     "samples": [
-                        "temperature up"
+                        "temperature up",
+                        "turn temperature up",
+                        "ac temperature up"
                     ]
                 },
                 {
                     "name": "TempDown",
                     "samples": [
-                        "temperature down"
+                        "temperature down",
+                        "turn temperature down",
+                        "ac temperature down"
                     ]
                 },
                 {
-                    "name": "SpeedAuto",
+                    "name": "ChangeSpeed",
                     "samples": [
-                        "set speed to auto"
+                        "change ac speed",
+                        "change air conditioner speed",
+                        "change speed"
                     ]
                 },
                 {
-                    "name": "SpeedOne",
+                    "name": "ChangeDirection",
                     "samples": [
-                        "set speed to one"
-                    ]
-                },
-                {
-                    "name": "SpeedTwo",
-                    "samples": [
-                        "set speed to two"
-                    ]
-                },
-                {
-                    "name": "SpeedThree",
-                    "samples": [
-                        "set speed to three"
-                    ]
-                },
-                {
-                    "name": "DirectionAuto",
-                    "samples": [
-                        "set direction to auto"
-                    ]
-                },
-                {
-                    "name": "DirectionOne",
-                    "samples": [
-                        "set direction to one"
-                    ]
-                },
-                {
-                    "name": "DirectionTwo",
-                    "samples": [
-                        "set direction to two"
-                    ]
-                },
-                {
-                    "name": "DirectionThree",
-                    "samples": [
-                        "set direction to three"
-                    ]
-                },
-                {
-                    "name": "DirectionFour",
-                    "samples": [
-                        "set direction to four"
-                    ]
-                },
-                {
-                    "name": "DirectionFive",
-                    "samples": [
-                        "set direction to five"
+                        "change ac direction",
+                        "change air conditioner direction",
+                        "change direction"
                     ]
                 }
             ],
