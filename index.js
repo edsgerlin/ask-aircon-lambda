@@ -21,7 +21,7 @@ async function putWithForm(form) {
 async function putRemote(device, command) {
   return new Promise((resolve, reject) => {
     const targetUrl = `${BASE_URL}/remote/${device}/key_${command}` 
-    request.put(url, (error, response) => {
+    request.put(targetUrl, (error, response) => {
       // device = {pioneer.tv, iris_oyama.light}
       if (error) {
         reject(error);
