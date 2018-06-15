@@ -70,7 +70,7 @@ const DeviceCommandIntentHandler = {
     const command = slots.Command.value.replace(' ', '')
 
     await putRemote(device, command);
-    let speechText = `${slots.Device.value} is ${command}.`;
+    let speechText = `${slots.Device.value} is executing ${slots.Command.value}.`;
     return handlerInput.responseBuilder
       .speak(speechText)
       .withSimpleCard(speechText, speechText)
