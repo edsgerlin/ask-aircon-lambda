@@ -23,10 +23,10 @@ async function putRemote(device, command) {
     const targetUrl = `${BASE_URL}/remote/${device}/key_${command}` 
     request.put(targetUrl, (error, response) => {
       // device = {pioneer.tv, iris_oyama.light}
-      // if (error) {
-      //   reject(error);
-      // }
-      resolve(JSON.parse(response));
+      if (error) {
+        reject(error);
+      }
+      resolve(response);
     });
   });
 }
