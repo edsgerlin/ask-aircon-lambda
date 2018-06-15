@@ -18,6 +18,19 @@ async function putWithForm(form) {
   });
 }
 
+async function putRemote(device, command) {
+  return new Promise((resolve, reject) => {
+    const targetUrl = `${BASE_URL}/remote/${device}/key_${command}` 
+    request.put(url, (error, response) => {
+      // device = {pioneer.tv, iris_oyama.light}
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(response));
+    });
+  });
+}
+
 async function getACStatus() {
   return new Promise((resolve, reject) => {
     request.get(url, (error, response, body) => {
