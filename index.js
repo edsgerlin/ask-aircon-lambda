@@ -159,7 +159,7 @@ const GetRoomTemperatureIntentHandler = {
   async handle(handlerInput) {
     const acStatus = await getACStatus();
     const roomTemperature = acStatus.room_temp;
-    const speechText = `Current room temperature is ${roomTemperature}°C.`;
+    const speechText = `Current room temperature is ${Math.round(roomTemperature)}°C.`;
 
     return handlerInput.responseBuilder
       .speak(speechText)

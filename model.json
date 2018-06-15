@@ -64,6 +64,15 @@
                         "change air conditioner direction",
                         "change direction"
                     ]
+                },
+                {
+                    "name": "GetRoomTemperature",
+                    "samples": [
+                        "get room temperature",
+                        "get temperature",
+                        "get current temperature",
+                        "what is the temperature"
+                    ]
                 }
             ],
             "types": [
